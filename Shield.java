@@ -18,7 +18,13 @@ public class Shield {
         heroes.add(new Hero("Doctor Strange", 42, false));
 
         List<Hero> elders;
-        // TODO 1 : filter heroes in order to found heroes older than 59
+                     
+        // -------- https://howtodoinjava.com/java8/how-to-use-predicate-in-java-8/
+
+        Predicate <Hero> older = p -> p.getAge() > 60; 
+        elders = heroes.stream().filter(older).collect(Collectors.toList());
+   
+        // ----------------
 
         System.out.println("\nElders:");
         for (Hero elder : elders) {
@@ -28,9 +34,20 @@ public class Shield {
         List<Hero> intolerants;
         // TODO 2 : filter heroes in order to found heroes that are gluten intolerants
 
+        // ----------------
+        // wie oben mit dem alter, jetzt mit glutenintolerant
+        
+        Predicate <Hero> gluten = p -> p.isGlutenIntolerant() == true; 
+        intolerants = heroes.stream().filter(gluten).collect(Collectors.toList());
+
+
+        // -----------------
+
         System.out.println("\nGluten intolerants:");
         for (Hero intolerant : intolerants) {
             System.out.println(intolerant.getName());
         }
+
     }
+
 }
